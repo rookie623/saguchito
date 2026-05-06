@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sanguchito - Invitame un sándwich</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #ff9f1c; /* Color miga/tostado */
+            --bg: #f8f9fa;
+            --text: #2d3436;
+            --card-bg: #ffffff;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            background: var(--card-bg);
+            width: 100%;
+            max-width: 450px;
+            padding: 40px 30px;
+            border-radius: 24px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            text-align: center;
+            border: 1px solid #eee;
+        }
+
+        .profile-img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: #e0e0e0;
+            margin-bottom: 20px;
+            object-fit: cover;
+            border: 4px solid var(--primary);
+        }
+
+        h1 { font-weight: 800; font-size: 1.8rem; margin-bottom: 8px; }
+        p { color: #636e72; margin-bottom: 30px; line-height: 1.5; }
+
+        .sangu-selector {
+            background: #f1f2f6;
+            padding: 20px;
+            border-radius: 16px;
+            margin-bottom: 25px;
+        }
+
+        .sangu-icons {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .amount-options {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .btn-option {
+            background: white;
+            border: 2px solid transparent;
+            padding: 10px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .btn-option:hover { border-color: var(--primary); }
+        .btn-option.active { 
+            background: var(--primary); 
+            color: white; 
+            border-color: var(--primary);
+        }
+
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #dfe6e9;
+            border-radius: 10px;
+            font-family: inherit;
+        }
+
+        .btn-pay {
+            background: var(--primary);
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 15px;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-pay:hover { transform: scale(1.02); background: #f39c12; }
+
+        footer { margin-top: 20px; font-size: 0.8rem; color: #b2bec3; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Reemplaza la URL de la imagen con la tuya -->
+    <img src="/img/logo.png" alt="Tu Foto" class="profile-img">
+    
+    <h1>Invitame un sanguchito</h1>
+    <p>Si te sirvió lo que comparto, podés apoyarme invitándome un sanguche de milanesa (o de miga).</p>
+
+    <div class="sangu-selector">
+        <div class="sangu-icons" id="sangu-display">🥪</div>
+        <div class="amount-options">
+            <button class="btn-option active" onclick="setAmount(1, 500)">x1</button>
+            <button class="btn-option" onclick="setAmount(3, 1500)">x3</button>
+            <button class="btn-option" onclick="setAmount(5, 2500)">x5</button>
+        </div>
+        <p style="margin: 10px 0 0 0; font-weight: 600;" id="price-label">$500</p>
+    </div>
+
+    <input type="text" placeholder="Tu nombre (opcional)">
+    <textarea placeholder="Dejá un mensaje..."></textarea>
+
+    <!-- Aquí iría tu link de Mercado Pago -->
+    <a href="TU_LINK_DE_PAGO_AQUI" class="btn-pay" id="pay-link">
+        Invitar <span id="sangu-count">1</span> Sanguchito(s)
+    </a>
+
+    <footer>
+        Hecho con 🥪 en Sanguchito.app (Clon)
+    </footer>
+</div>
+
+<script>
+    function setAmount(count, price) {
+        // Actualizar visualización de sándwiches
+        const display = document.getElementById('sangu-display');
+        display.innerText = "🥪".repeat(count);
+        
+        // Actualizar label de precio y contador en botón
+        document.getElementById('price-label').innerText = `$${price}`;
+        document.getElementById('sangu-count').innerText = count;
+
+        // Cambiar estado activo de botones
+        const buttons = document.querySelectorAll('.btn-option');
+        buttons.forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+
+        // Lógica para cambiar el link de Mercado Pago según el monto
+        // const links = { 1: 'link1', 3: 'link3', 5: 'link5' };
+        // document.getElementById('pay-link').href = links[count];
+    }
+</script>
+
+</body>
+</html>
